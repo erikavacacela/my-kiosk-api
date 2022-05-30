@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+
+  api:
+    container_name: kiosk_api
+    image: evacacela/my-kiosk-api:1.0.1
+    restart: always
+    environment:
+      DB_IP: 192.168.100.5
+    ports:
+      - "8080:8080"
