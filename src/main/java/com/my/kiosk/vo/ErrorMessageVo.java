@@ -15,6 +15,6 @@ import java.io.Serializable;
 @QueryEntity
 public class ErrorMessageVo implements Serializable {
 
-    String message;
+    String errorMessage;
 
 }

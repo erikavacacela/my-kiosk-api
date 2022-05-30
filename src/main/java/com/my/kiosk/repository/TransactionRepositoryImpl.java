@@ -2,6 +2,7 @@ package com.my.kiosk.repository;
 
 import com.my.kiosk.entity.QAccountEntity;
 import com.my.kiosk.entity.QTransactionEntity;
+import com.my.kiosk.entity.QUserEntity;
 import com.my.kiosk.entity.TransactionEntity;
 import com.my.kiosk.vo.TransactionVo;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -31,21 +32,22 @@ public class TransactionRepositoryImpl implements TransactionRepository {
     @Override
     public TransactionVo findById(Long id) {
         QTransactionEntity transactionEntity = QTransactionEntity.transactionEntity;
-        QAccountEntity accountEntitySender = QAccountEntity.accountEntity;
-        QAccountEntity accountEntityReceiver = QAccountEntity.accountEntity;
 
-        return jpaQueryFactory.from(transactionEntity)
+        return jpaQueryFactory
+                .from(transactionEntity)
                 .select(bean(TransactionVo.class,
                         transactionEntity.id,
                         transactionEntity.amount,
                         transactionEntity.description,
                         transactionEntity.date,
-                        accountEntitySender.user.firstName.as("senderFirstName"),
-                        accountEntitySender.user.lastName.as("senderLastName"),
-                        accountEntityReceiver.user.firstName.as("receiverFirstName"),
-                        accountEntityReceiver.user.lastName.as("receiverLastName")))
-                .innerJoin(transactionEntity.senderAccount, accountEntitySender)
-                .innerJoin(transactionEntity.receiverAccount, accountEntityReceiver)
+                        transactionEntity.senderAccount.user.firstName.as("senderFirstName"),
+                        transactionEntity.senderAccount.user.lastName.as("senderLastName"),
+                        transactionEntity.receiverAccount.user.firstName.as("receiverFirstName"),
+                        transactionEntity.receiverAccount.user.lastName.as("receiverLastName")))
+                .innerJoin(transactionEntity.senderAccount)
+                .innerJoin(transactionEntity.receiverAccount)
+                .innerJoin(transactionEntity.senderAccount.user)
+                .innerJoin(transactionEntity.receiverAccount.user)
                 .where(transactionEntity.id.eq(id))
                 .fetchFirst();
     }

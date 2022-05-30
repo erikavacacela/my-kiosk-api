@@ -30,7 +30,7 @@ public class TransactionController {
             return ResponseEntity.ok(transactionVo);
         } catch (RuntimeException ex) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(ErrorMessageVo.builder().message(ex.getMessage()).build());
+                    .body(ErrorMessageVo.builder().errorMessage(ex.getMessage()).build());
         }
     }
 
