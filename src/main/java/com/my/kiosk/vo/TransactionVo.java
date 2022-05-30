@@ -24,13 +24,16 @@ public class TransactionVo implements Serializable {
 
     private Timestamp date;
 
+    private Long senderAccountId;
+
     private String senderFirstName;
 
     private String senderLastName;
+
+    private Long receiverAccountId;
 
     private String receiverFirstName;
 
     private String receiverLastName;
 
-    private Double newAmount;
 }

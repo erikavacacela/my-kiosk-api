@@ -16,9 +16,9 @@ public class AccountController {
     @Autowired
     AccountService accountService;
 
-    @GetMapping(value = "/findByUser/{user_id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public AccountVo findById(@PathVariable Long user_id) {
-        return accountService.findByUser(user_id);
+    @GetMapping(value = "/findByUser/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public AccountVo findById(@PathVariable Long userId) {
+        return accountService.findByUser(userId);
     }
 
 }

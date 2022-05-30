@@ -8,13 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Collection;
+import java.util.Map;
 
 @RestController
-@RequestMapping("/v1/transaction")
+@RequestMapping("/v1/transactions")
 public class TransactionController {
 
     @Autowired
@@ -32,6 +32,12 @@ public class TransactionController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(ErrorMessageVo.builder().errorMessage(ex.getMessage()).build());
         }
+    }
+
+    @GetMapping(value = "/findByAccount/{accountId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Map<String, Collection<TransactionVo>> findById(@PathVariable Long accountId) {
+        Collection<TransactionVo> transactionVoCollection = transactionService.findByAccount(accountId);
+        return Map.of("transactions", transactionVoCollection);
     }
 
 }
