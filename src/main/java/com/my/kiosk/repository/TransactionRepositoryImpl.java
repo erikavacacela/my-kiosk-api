@@ -74,6 +74,7 @@ public class TransactionRepositoryImpl implements TransactionRepository {
                 .innerJoin(transactionEntity.receiverAccount.user)
                 .where(transactionEntity.senderAccountId.eq(accountId)
                         .or(transactionEntity.receiverAccountId.eq(accountId)))
+                .orderBy(transactionEntity.id.desc())
                 .fetch();
     }
 }
