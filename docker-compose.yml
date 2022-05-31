@@ -4,11 +4,12 @@ services:
 
   api:
     container_name: kiosk_api
-    image: evacacela/my-kiosk-api:1.0.1
+    image: evacacela/my-kiosk-api:1.2.0-SNAPSHOT
     restart: always
     environment:
-      DB_IP: xxx.xxx.xx.x
-      DB_USERNAME: xxx
-      DB_PASSWORD: xxx
+      DB_IP: xxx.xxx.xxx.x
+      DB_USERNAME: mykiosklocal
+      DB_PASSWORD: kk84joRPC5
+      DB_NAME: mykiosk
     ports:
       - "8080:8080"
