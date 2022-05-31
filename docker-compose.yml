@@ -7,6 +7,8 @@ services:
     image: evacacela/my-kiosk-api:1.0.1
     restart: always
     environment:
-      DB_IP: 192.168.100.5
+      DB_IP: xxx.xxx.xx.x
+      DB_USERNAME: xxx
+      DB_PASSWORD: xxx
     ports:
       - "8080:8080"
